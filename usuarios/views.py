@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
  
 from django.contrib.auth.models import User  
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.contrib.auth import authenticate, login, logout
 
 def cadastro(request):
     if request.method == "GET":
@@ -41,3 +42,21 @@ def cadastro(request):
 def logar(request):
     if request.method == "GET":
         return render(request, 'login.html')
+    
+    elif request.method == "POST":
+        nome = request.POST.get('nome')
+        senha = request.POST.get('senha')
+
+        # verificação 
+        user = authenticate(username=nome,
+                            password=senha)
+        #print(user)  # none nao existe, se existir aparecerar o nome do usuario
+
+        # validações
+        if user is not None:
+            login(request, user)
+            return redirect(f'/divulgar/novo_pet')
+        else:
+            messages.add_message(request, constants.ERROR, 'Usuario ou senha incorretos!!!')
+            return render(request, 'login.html')
+            
