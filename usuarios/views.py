@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 
 def cadastro(request):
 
+    if request.user.is_authenticated:
+        return redirect('/divulgar/novo_pet')
 
     if request.method == "GET":
         return render(request, 'cadastro.html')
@@ -43,6 +45,8 @@ def cadastro(request):
 
 def logar(request):
     
+    if request.user.is_authenticated:
+        return redirect('/divulgar/novo_pet')
 
     if request.method == "GET":
         return render(request, 'login.html')
