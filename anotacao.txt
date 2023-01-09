@@ -1,0 +1,4 @@
+ fazer a validação do email com regex
+    enviar um email para o usuario confimar o cadastro
+
+ver se a senha é maior que > 5 caracteres e posua letra minuscula maiuscula e caracter especial

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
  
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  
 from django.contrib import messages
 from django.contrib.messages import constants
 
@@ -32,6 +32,8 @@ def cadastro(request):
                 email=email,
                 password=senha,
             )
+            messages.add_message(request, constants.SUCCESS, 'Criado com sucesso')
             return render(request, 'cadastro.html')
         except:
+            messages.add_message(request, constants.ERROR, 'Erro interno do sistema! tente mais tarde.')
             return render(request, 'cadastro.html')
