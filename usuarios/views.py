@@ -7,6 +7,8 @@ from django.contrib.messages import constants
 from django.contrib.auth import authenticate, login, logout
 
 def cadastro(request):
+
+
     if request.method == "GET":
         return render(request, 'cadastro.html')
     elif request.method == "POST":
@@ -40,6 +42,8 @@ def cadastro(request):
             return render(request, 'cadastro.html')
 
 def logar(request):
+    
+
     if request.method == "GET":
         return render(request, 'login.html')
     
@@ -59,4 +63,7 @@ def logar(request):
         else:
             messages.add_message(request, constants.ERROR, 'Usuario ou senha incorretos!!!')
             return render(request, 'login.html')
-            
+
+def sair(request):
+    logout(request)
+    return redirect('/auth/login')
