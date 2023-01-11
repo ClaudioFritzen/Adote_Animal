@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def novo_pet(request):
-    return HttpResponse("estamos pra criar um novo pet")
+    if request.method == "GET":
+        return render(request, 'novo_pet.html')
+    
     
