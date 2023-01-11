@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
         # meus apps
     'usuarios',
+    'divulgar', 
 ]
 
 MIDDLEWARE = [
