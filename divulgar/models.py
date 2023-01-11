@@ -24,7 +24,7 @@ class Pet(models.Model):
     usuario = models.ForeignKey(User, on_delete= models.CASCADE)
     foto = models.ImageField(upload_to='fotos_pets')
     nome = models.CharField(max_length=100)
-    descricao = models.TimeField()
+    descricao = models.TextField()
     estado = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
     telefone = models.CharField(max_length=20)
