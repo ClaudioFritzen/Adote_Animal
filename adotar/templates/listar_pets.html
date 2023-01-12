@@ -18,7 +18,7 @@
                 <div class="col-md-2 bg-side sidebar">
                     <h2>ADO.TE</h2>
                     <hr>
-                    
+                    <a href=" {% url 'sair' %}" class="btn btn-danger">Logout</a>                    
                     
                 </div>
 
@@ -43,7 +43,9 @@
 
                                     <div class="col-md-4">
                                         <select class="form-select" name="raca">
-                                           
+                                           {% for raca in racas %}
+                                                <option value='{{raca.id}}'> {{raca}} </option>
+                                           {% endfor %}
                                         </select>
                                     </div>
                                     <div class="col-md-2">
