@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from divulgar.models import Pet, Raca
 from .models import PedidoAdocao
 from datetime import datetime
@@ -42,3 +42,8 @@ def pedido_adocao(request, id_pet):
 
     messages.add_message(request, constants.SUCCESS, 'Pedido de adoção realizado, você receberá um e-mail caso ele seja aprovado.')
     return redirect('/adotar')
+
+
+def processa_pedido_adocao(request, id_pedido):
+    status = request.GET.get('status')
+    return  HttpResponse(f' Estado do pedido {status}')
