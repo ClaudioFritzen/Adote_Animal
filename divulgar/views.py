@@ -4,6 +4,8 @@ from .models import Pet, Tag, Raca
 from django.contrib import messages
 from django.contrib.messages import constants
 
+from adotar.models import PedidoAdocao
+
 @login_required
 def novo_pet(request):
     if request.method == "GET":
@@ -75,3 +77,7 @@ def ver_pet(request, id):
 
 
 
+def ver_pedido_adocao(request):
+    if request.method == "GET":
+        pedidos = PedidoAdocao.objects.filter(usuario=request.user).filter(status="AG")
+        return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos})
