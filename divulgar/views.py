@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Pet, Tag, Raca
 from django.contrib import messages
 from django.contrib.messages import constants
 
 from adotar.models import PedidoAdocao
+
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required
 def novo_pet(request):
@@ -70,14 +73,38 @@ def remover_pet(request, id):
 
 
 # para ver os pets
+@login_required
 def ver_pet(request, id):
     if request.method == "GET":
         pet = Pet.objects.get(id = id)
         return render(request, 'ver_pet.html', {'pet': pet})
 
 
-
+@login_required
 def ver_pedido_adocao(request):
     if request.method == "GET":
-        pedidos = PedidoAdocao.objects.filter(usuario=request.user).filter(status="AG")
+        pedidos = PedidoAdocao.objects.filter(pet__usuario=request.user).filter(status="AG")
         return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos})
+
+@login_required
+def dashboard(request):
+    if request.method == "GET":
+        return render(request, 'dashboard.html')
+
+
+# criamos uma API dentro da views
+@csrf_exempt
+def api_adocoes_por_raca(request):
+    racas = Raca.objects.all()
+
+    # para sabermos quantas adoçoes tivemos
+    qtd_adocao = []
+    for raca in racas:
+        adocoes = PedidoAdocao.objects.filter(pet__raca=raca).filter(status="AP").count()
+        qtd_adocao.append(adocoes)
+    
+    racas = [ raca.raca for raca in racas]
+    data = {'qtd_adocoes': qtd_adocao,
+            'labels': racas}
+
+    return JsonResponse(data)
