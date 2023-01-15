@@ -6,6 +6,8 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.messages import constants
 
+from django.core.mail import send_mail
+
 # Create your views here.
 def listar_pets(request):
     if request.method == "GET":
@@ -46,4 +48,27 @@ def pedido_adocao(request, id_pet):
 
 def processa_pedido_adocao(request, id_pedido):
     status = request.GET.get('status')
-    return  HttpResponse(f' Estado do pedido {status}')
+    pedido = PedidoAdocao.objects.get(id=id_pedido)
+
+    if status == "A":
+        pedido.status = "AP"
+        string = ''' Sua adoção foi aprovada com sucesso'''
+
+    elif status == "R":
+        pedido.status = "R"
+        string = ''' Sua adoção foi reprovada'''
+    
+    pedido.save()
+
+
+    # alterar o status do Pet
+    email = send_mail(
+        'Sua adoção foi processada',
+        string,
+        'sdfritzen96@gmail.com',
+        [pedido.usuario.email, ]
+
+    )
+    messages.add_message(request, constants.SUCCESS, 'Pedido de adoção processado com sucesso')
+
+    return  redirect('/divulgar/ver_pedido_adocao')

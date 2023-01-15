@@ -11,7 +11,11 @@ class PedidoAdocao(models.Model):
         ('R', 'Recusado')
     )
 
-    pet = models.ForeignKey(Pet, on_delete=models.DO_NOTHING)
-    usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateTimeField()
     status = models.CharField(max_length=2, choices=choices_status, default='AG')
+
+    def __str__(self):
+        return self.pet.nome
+    
