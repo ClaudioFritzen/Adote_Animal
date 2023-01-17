@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -82,15 +82,21 @@ WSGI_APPLICATION = 'adote.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+""" 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+} """
+
+""" 
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
-
+ """
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -129,6 +135,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
 STATIC_ROOT = os.path.join('static')
 
+#STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -150,23 +159,11 @@ MESSAGE_TAGS = {
 import pymongo
 from pymongo import MongoClient
 from decouple import config
-
-""" MONGO_URI = config('MONGO_URI')
-#MONGO_USERNAME = config('MONGO_USERNAME')
-MONGO_PASSWORD = config('MONGO_PASSWORD')
-MONGO_DBNAME = config('MONGO_DBNAME')
-
-client = MongoClient(MONGO_URI)
-db = client[MONGO_DBNAME] """
-
-
-MONGO_URI =config('MONGO_URI')
-#MONGO_USERNAME = config('MONGO_USERNAME')
-MONGO_PASSWORD = config('MONGO_PASSWORD')
-MONGO_DBNAME = config('MONGO_DBNAME')
-
-client = MongoClient(MONGO_URI)
-db = client[MONGO_DBNAME]
+ 
+MONGO_URI=config('MONGO_URI')
+MONGO_DBNAME=config('MONGO_DBNAME')
+client=MongoClient(MONGO_URI)
+db=client[MONGO_DBNAME]
 
 
 
