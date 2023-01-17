@@ -147,6 +147,32 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
+import pymongo
+from pymongo import MongoClient
+from decouple import config
+
+""" MONGO_URI = config('MONGO_URI')
+#MONGO_USERNAME = config('MONGO_USERNAME')
+MONGO_PASSWORD = config('MONGO_PASSWORD')
+MONGO_DBNAME = config('MONGO_DBNAME')
+
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DBNAME] """
+
+
+MONGO_URI =config('MONGO_URI')
+#MONGO_USERNAME = config('MONGO_USERNAME')
+MONGO_PASSWORD = config('MONGO_PASSWORD')
+MONGO_DBNAME = config('MONGO_DBNAME')
+
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DBNAME]
+
+
+
+
+"""  """
+
 
 #email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -3,3 +3,11 @@ SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+
+
+MONGO_USERNAME=<username>
+MONGO_PASSWORD=<password>
+MONGO_DBNAME=<dbname>
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
