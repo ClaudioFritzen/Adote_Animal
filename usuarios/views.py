@@ -105,3 +105,4 @@ def logar(request):
 def sair(request):
     logout(request)
     return redirect('/auth/login')
+
