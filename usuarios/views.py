@@ -42,9 +42,9 @@ def cadastro(request):
          #return HttpResponse('Cliente já existe')
 
         # validação de email com regex
-        if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
-            messages.add_message(request, constants.WARNING, 'Digite um emai valido')
-            return render(request, {'nome': nome, 'senha': senha, 'confirmar_senha': confirmar_senha})
+        """ if not re.fullmatch(re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'), email):
+            messages.add_message(request, constants.WARNING, 'Digite um emai valido') """
+            #return render(request, {'nome': nome, 'senha': senha, 'confirmar_senha': confirmar_senha})
 
 
                 
@@ -72,7 +72,7 @@ def cadastro(request):
                 password=senha,
             )
             messages.add_message(request, constants.SUCCESS, 'Criado com sucesso')
-            return render(request, 'cadastro.html')
+            return render(request, 'login.html')
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno do sistema! tente mais tarde.')
             return render(request, 'cadastro.html')

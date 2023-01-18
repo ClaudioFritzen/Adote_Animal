@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1']
 
 
 # Application definition
@@ -82,21 +82,28 @@ WSGI_APPLICATION = 'adote.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-""" 
+
+# 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'phwxsmcq',
+        'USER':  os.getenv('USUARIO'),
+        'PASSWORD': os.getenv('SENHA_ELEFANTE'),
+        'HOST': os.getenv('HOST'),
+        'PORT': '5432',
+    }
+}
+
+
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-} """
+}  """
 
-""" 
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-}
 
- """
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -155,20 +162,6 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
-
-import pymongo
-from pymongo import MongoClient
-from decouple import config
- 
-MONGO_URI=config('MONGO_URI')
-MONGO_DBNAME=config('MONGO_DBNAME')
-client=MongoClient(MONGO_URI)
-db=client[MONGO_DBNAME]
-
-
-
-
-"""  """
 
 
 #email
