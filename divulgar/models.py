@@ -2,6 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from .choices import ESTADOS_BRASIL
+from django.forms import forms
 # Create your models here.
 class Raca(models.Model):
     raca = models.CharField(max_length=50)
@@ -35,4 +37,44 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.nome
+class Estados(models.Model):
+
+    ESTADOS_BRASIL = (
+    ('AC', 'Acre'),
+    ('AL', 'Alagoas'),
+    ('AM', 'Amazonas'),
+    ('AP', 'Amapá'),
+    ('BA', 'Bahia'),
+    ('CE', 'Ceará'),
+    ('DF', 'Distrito Federal'),
+    ('ES', 'Espírito Santo'),
+    ('GO', 'Goiás'),
+    ('MA', 'Maranhão'),
+    ('MG', 'Minas Gerais'),
+    ('MS', 'Mato Grosso do Sul'),
+    ('MT', 'Mato Grosso'),
+    ('PA', 'Pará'),
+    ('PB', 'Paraíba'),
+    ('PE', 'Pernambuco'),
+    ('PI', 'Piauí'),
+    ('PR', 'Paraná'),
+    ('RJ', 'Rio de Janeiro'),
+    ('RN', 'Rio Grande do Norte'),
+    ('RO', 'Rondônia'),
+    ('RR', 'Roraima'),
+    ('RS', 'Rio Grande do Sul'),
+    ('SC', 'Santa Catarina'),
+    ('SE', 'Sergipe'),
+    ('SP', 'São Paulo'),
+    ('TO', 'Tocantins')
+)
+    estados = models.CharField(max_length=2, choices=ESTADOS_BRASIL)
+
+    def __str__(self):
+        return self.estados
     
+
+""" class Estado(models.Model):
+    sigla = models.CharField(max_length=2)
+    nome = models.CharField(max_length=255) """
+
