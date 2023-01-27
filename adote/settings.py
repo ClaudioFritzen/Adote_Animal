@@ -84,7 +84,30 @@ WSGI_APPLICATION = 'adote.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# 
+# postgress
+""" DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'URL': os.environ.get('DATABASE_URL'),
+        'CONN_MAX_AGE': 600,
+    }
+}
+ """
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT', ''),
+        'CONN_MAX_AGE': 600,
+    }
+}
+
+
+
+""" # elephant sql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,7 +118,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+ """
 
 """ DATABASES = {
     'default': {

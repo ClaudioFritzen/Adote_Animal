@@ -11,3 +11,12 @@ MONGO_USERNAME=<username>
 MONGO_PASSWORD=<password>
 MONGO_DBNAME=<dbname>
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+
+# Postgress Render
+
+NAME = ''
+USER = ''
+SENHA = ''
+HOST = ''
+PORT = ''
